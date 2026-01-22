@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.env
+.venv/
+venv/
+ENV/
+
+# Node / React
+node_modules/
+dist/
+build/
+.vite/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# App temp outputs
+temp_uploads/
+*.xlsx
+*.xls
