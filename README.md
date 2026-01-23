@@ -1,16 +1,21 @@
-\# WIKISOFT 퇴직급여채무 명부 AI 자동검증
+\# WIKISOFT – 퇴직급여채무 명부관리체계 AI 자동검증
 
-
-
-퇴직급여채무 명부(Excel)를 업로드하면,  
-
-파이썬 규칙 기반 검증 + GPT 기반 분석으로 오류/리스크를 검출하고  
-
-검증 결과 엑셀 파일을 다운로드할 수 있는 웹 서비스입니다.
-
+엑셀(퇴직급여 명부)을 업로드하면  
+1) 규칙 기반 검증(rules)으로 기본 오류를 잡고  
+2) AI 분석 리포트(ai_report)를 생성하며  
+3) 오류 표시가 반영된 결과 엑셀 파일을 다운로드할 수 있는 프로젝트입니다.
 
 
 ---
+## 프로젝트 구성(예시)
+
+- `main_api.py` : FastAPI 서버 엔트리포인트(프로젝트 루트)
+- `backend/`
+  - `rules.py` : 규칙 기반 검증 로직
+  - `anonymizer.py` : 비식별화 로직
+  - `ai_analyzer.py` : GPT 분석 리포트 생성
+  - `exporter.py` : 결과 엑셀 생성(오류 하이라이트 등)
+- `frontend/` : React(Vite) 프론트엔드 (옵션)
 
 
 
@@ -73,7 +78,6 @@ python -m venv .venv
 \# Windows PowerShell
 
 .\\.venv\\Scripts\\Activate.ps1
-
 
 
 pip install -r requirements.txt

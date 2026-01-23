@@ -58,7 +58,7 @@ const triggerAnalysis = async () => {
     }
 
     const result = await response.json(); 
-    setAnalysisResult(result.data ?? result);
+    setAnalysisResult(result.data);
     return result; // status 체크를 위해 전체 응답을 반환합니다.
 
   } catch (error) {

@@ -9,6 +9,7 @@ import io
 import shutil
 import pandas as pd
 import re
+import mimetypes
 from typing import Union
 
 # backend 폴더(패키지) 안의 모듈들
@@ -240,11 +241,11 @@ async def download_result(file_name: str):
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail=f"파일을 찾을 수 없습니다: {safe_name}")
 
-    return FileResponse(
-        file_path,
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        filename=safe_name,
-    )
+    media_type, _ = mimetypes.guess_type(file_path)
+    if not media_type:
+        media_type = "application/octet-stream"
+
+    return FileResponse(file_path, media_type=media_type, filename=safe_name)
 
 if __name__ == "__main__":
     import uvicorn
