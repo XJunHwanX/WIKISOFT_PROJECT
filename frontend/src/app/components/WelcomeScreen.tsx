@@ -160,6 +160,11 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
               <span>상세 오류 보고서</span>
             </div>
           </div>
+          <p className="mt-6 text-xs text-slate-400 text-center">
+            <span className="font-semibold">.xls</span> 업로드 시 결과 파일이{" "}
+            <span className="font-semibold">.xlsx</span>로 변환되며, 일부 서식이 원본과 다를 수 있습니다.{" "}
+            <span className="font-semibold">.xlsx</span>사용을 권장합니다.
+          </p>
         </div>
       </div>
     </div>
