@@ -14,20 +14,35 @@ interface StepIndicatorProps {
 export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
   return (
     <div className="relative">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         {steps.map((step, index) => {
           const isCompleted = currentStep > step.number;
           const isCurrent = currentStep === step.number;
-          const isUpcoming = currentStep < step.number;
+
+          // ✅ 왼쪽 선(이전 -> 현재): 현재 단계에 도달했으면 파랑 (>=)
+          const leftActive = currentStep >= step.number;
+
+          // ✅ 오른쪽 선(현재 -> 다음): 현재 단계를 "완료"했으면 파랑 (>)
+          const rightActive = currentStep > step.number;
 
           return (
             <div key={step.number} className="flex-1">
               <div className="relative flex flex-col items-center">
-                {/* Connector Line */}
+                {/* ✅ Left Connector (이전 -> 현재) */}
+                {index > 0 && (
+                  <div
+                    className={`absolute top-6 left-0 w-1/2 h-0.5 ${
+                      leftActive ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
+                    style={{ zIndex: 0 }}
+                  />
+                )}
+
+                {/* ✅ Right Connector (현재 -> 다음) */}
                 {index < steps.length - 1 && (
                   <div
-                    className={`absolute top-6 left-1/2 w-full h-0.5 ${
-                      isCompleted ? 'bg-blue-600' : 'bg-gray-300'
+                    className={`absolute top-6 left-1/2 w-1/2 h-0.5 ${
+                      rightActive ? 'bg-blue-600' : 'bg-gray-300'
                     }`}
                     style={{ zIndex: 0 }}
                   />
@@ -55,12 +70,18 @@ export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
                   <div className="mt-4 text-center max-w-[160px]">
                     <p
                       className={`font-semibold ${
-                        isCurrent ? 'text-blue-600' : isCompleted ? 'text-gray-900' : 'text-gray-400'
+                        isCurrent
+                          ? 'text-blue-600'
+                          : isCompleted
+                          ? 'text-gray-900'
+                          : 'text-gray-400'
                       }`}
                     >
                       {step.title}
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">{step.description}</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               </div>
